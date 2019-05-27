@@ -7,7 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./ItemDetail.css";
 
-class ItemDetail extends React.Component {
+export class ItemDetail extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,6 +20,9 @@ class ItemDetail extends React.Component {
     this.getIdFromUrl();
   }
 
+  /**
+   * Get item id from url.
+   */
   getIdFromUrl = () => {
     const { pathname } = window.location;
     const index = pathname.lastIndexOf('/');
@@ -28,6 +31,11 @@ class ItemDetail extends React.Component {
     this.setState({ id });
   }
 
+  /**
+   * Render list of images.
+   * 
+   * @returns { [DOM] }
+   */
   renderImages = (item) => {
     const { images } = item;
     const { id } = this.state;
@@ -53,7 +61,7 @@ class ItemDetail extends React.Component {
           </Link>
         </div>
         {selectedItem
-          ? <div className="item-container">
+        ? <div className="item-container">
             <div className="main-image">
               <Carousel>
                 { this.renderImages(selectedItem) }
@@ -66,7 +74,7 @@ class ItemDetail extends React.Component {
             </div>
           </div>
         
-          : <div><FontAwesomeIcon icon={ faSpinner } spin /> Loading...</div>
+        : <div><FontAwesomeIcon icon={ faSpinner } spin /> Loading...</div>
         }
       </div>
     )

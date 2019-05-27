@@ -20,15 +20,23 @@ class Home extends React.Component {
     const { loadItems } = this.props;
     this.containerEl = document.getElementById('home');
 
+    // Add scroll event listener to DOM
     document.addEventListener('scroll', this.onScrollContainer);
 
+    // Load (dummy) data when component mount
     loadItems();
   }
 
   componentWillUnmount = () => {
+    // Remove scroll event listener before component unmount, prevent MEMORY LEAK
     document.removeEventListener('scroll', this.onScrollContainer);
   }
 
+  /**
+   * On scroll event handler.
+   * 
+   * @param {Event} e
+   */
   onScrollContainer = (e) => {
     setTimeout(() => {
       const { loadItems } = this.props;
@@ -38,12 +46,21 @@ class Home extends React.Component {
     }, 0);
   }
 
+  /**
+   * On change theme event handler.
+   * 
+   * @param {String}  value
+   */
   onChangeTheme = (value) => {
-    console.log(`onChangeTheme(${value})`);
     const { themeChange } = this.props;
     themeChange(value);
   }
 
+  /**
+   * Render item list.
+   * 
+   * @returns {[DOM]}
+   */
   renderItems = () => {
     const { items } = this.props;
     const { byId, ids } = items.entities;

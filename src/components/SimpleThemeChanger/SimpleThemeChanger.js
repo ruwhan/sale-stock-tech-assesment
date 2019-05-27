@@ -3,6 +3,11 @@ import React from "react";
 import "./SimpleThemeChanger.css";
 
 class SimpleThemeChanger extends React.Component {
+  /**
+   * On change theme event handler, call onChangeTheme props and pass selected value.
+   * 
+   * @param {Event} e
+   */
   handleChangeTheme = (e) => {
     const { onChangeTheme } = this.props;
 
