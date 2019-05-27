@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { loadItems } from "../../actions/itemDispatcher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import ItemCard from "../../components/ItemCard";
+import Container from "../../components/Container";
 import "./Home.css";
 
 class Home extends React.Component {
@@ -29,9 +30,6 @@ class Home extends React.Component {
   onScrollContainer = (e) => {
     setTimeout(() => {
       const { loadItems } = this.props;
-      // console.log('handleScroll()');
-      // const el = document.getElementById('home');
-      // console.log(`${this.containerEl.scrollHeight}, ${window.innerHeight}, ${window.scrollY}`);
       if (this.containerEl.scrollHeight <= (window.innerHeight + window.scrollY)) {
         loadItems();
       }
@@ -40,7 +38,6 @@ class Home extends React.Component {
   
   renderImages = (item) => {
     const { images } = item;
-    // console.log(images);
 
     return (
       <div className="images-container">
@@ -58,22 +55,7 @@ class Home extends React.Component {
     return ids.map((id) => {
       const item = byId[id];
       
-      return (
-        <div key={ item.id } className="item-container">
-          <div className="main-image">
-            <Link to={`/details/${item.id}`}>
-              <img src={ item.images[0] } alt={ item.title } />
-            </Link>
-          </div>
-          <div className="item-detail-row-1">
-            <div className="item-detail-title">{ item.title }</div>
-            <div className="item-detail-price">{ item.price }</div>
-          </div>
-          <div className="item-detail-material">{ item.material }</div>
-          {/* { this.renderImages(item) } */}
-          {  }
-        </div>
-      )
+      return (<ItemCard key={ id } item={ item } />);
     });
   }
 
@@ -82,10 +64,10 @@ class Home extends React.Component {
     const { isLoading } = items;
 
     return (
-      <div className="home-container" id="home">
+      <Container givenId="home">
         { this.renderItems() }
         { isLoading && <div><FontAwesomeIcon icon={ faSpinner } spin /> Loading...</div> }
-      </div>
+      </Container>
     );
   }
 }

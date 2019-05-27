@@ -1,11 +1,4 @@
 .card-container {
-  display: flex;
-  flex: 1 1 0;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card-container .card-content {
   margin-top: 16px;
   margin-bottom: 16px;
   padding: 16px;

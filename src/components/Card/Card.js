@@ -1,12 +1,15 @@
+import PropTypes from "prop-types";
 import React from "react";
-import {  } from "./Card.css";
+import "./Card.css";
 
-const card = ({ children }) => (
+const Card = ({ children }) => (
   <div className="card-container">
-    <div className="card-content">
-      { children }
-    </div>
+    { children }
   </div>
 )
+
+Card.propTypes = {
+  children: PropTypes.node
+}
 
 export default Card
