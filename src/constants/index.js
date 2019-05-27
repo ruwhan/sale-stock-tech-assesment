@@ -1,3 +1,5 @@
 export const ITEMS_LOADING = 'ITEMS_LOADING';
 export const ITEMS_LOAD_SUCCESS = 'ITEMS_LOAD_SUCCESS';
 export const ITEMS_LOAD_FAIL = 'ITEMS_LOAD_FAIL';
+
+export const THEMES_CHANGE = 'THEMES_CHANGE';

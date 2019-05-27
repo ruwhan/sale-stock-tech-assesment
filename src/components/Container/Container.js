@@ -2,14 +2,14 @@ import PropTypes from "prop-types";
 import React from "react";
 import "./Container.css";
 
-const Container = ({ children, givenId = '' }) => (
+const Container = ({ children, additionalClasses = '', givenId = '' }) => (
   givenId 
   ? (
-    <div className="container" id={ givenId } >
+    <div className={`container ${additionalClasses}`} id={ givenId } >
       { children }
     </div>)
   : (
-    <div className="container">
+    <div className={`container ${additionalClasses}`}>
       { children }
     </div>
   )

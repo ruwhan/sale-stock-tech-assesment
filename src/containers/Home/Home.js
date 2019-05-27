@@ -1,10 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { loadItems } from "../../actions/itemDispatcher";
+import { themeChange } from "../../actions/themeDispatcher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import ItemCard from "../../components/ItemCard";
 import Container from "../../components/Container";
+import SimpleThemeChanger from "../../components/SimpleThemeChanger";
 import "./Home.css";
 
 class Home extends React.Component {
@@ -35,17 +37,11 @@ class Home extends React.Component {
       }
     }, 0);
   }
-  
-  renderImages = (item) => {
-    const { images } = item;
 
-    return (
-      <div className="images-container">
-          {images.map((imgUrl, index) => (
-            <div key={`img-${item.id}-0${index}`} className="image-item"><img src={ imgUrl } alt={ item.title } /></div>
-          ))}
-      </div>
-    );
+  onChangeTheme = (value) => {
+    console.log(`onChangeTheme(${value})`);
+    const { themeChange } = this.props;
+    themeChange(value);
   }
 
   renderItems = () => {
@@ -60,11 +56,14 @@ class Home extends React.Component {
   }
 
   render = () => {
-    const { items } = this.props;
+    const { items, themes } = this.props;
     const { isLoading } = items;
 
     return (
-      <Container givenId="home">
+      <Container givenId="home" additionalClasses={ `themes-${themes.selectedTheme}` }>
+        <div className="theme-changer-container">
+          <SimpleThemeChanger onChangeTheme={ this.onChangeTheme } />
+        </div>
         { this.renderItems() }
         { isLoading && <div><FontAwesomeIcon icon={ faSpinner } spin /> Loading...</div> }
       </Container>
@@ -73,11 +72,13 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  items: state.itemsReducer
+  items: state.itemsReducer,
+  themes: state.themesReducer
 });
 
 const mapDispatchToProps = {
-  loadItems
+  loadItems,
+  themeChange,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
