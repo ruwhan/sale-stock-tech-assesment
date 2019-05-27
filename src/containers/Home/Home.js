@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { loadItems } from "../../actions/itemDispatcher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 import "./Home.css";
 
 class Home extends React.Component {
@@ -58,7 +60,11 @@ class Home extends React.Component {
       
       return (
         <div key={ item.id } className="item-container">
-          <div className="main-image"><img src={ item.images[0] } alt={ item.title } /></div>
+          <div className="main-image">
+            <Link to={`/details/${item.id}`}>
+              <img src={ item.images[0] } alt={ item.title } />
+            </Link>
+          </div>
           <div className="item-detail-row-1">
             <div className="item-detail-title">{ item.title }</div>
             <div className="item-detail-price">{ item.price }</div>
@@ -78,7 +84,7 @@ class Home extends React.Component {
     return (
       <div className="home-container" id="home">
         { this.renderItems() }
-        { isLoading && <FontAwesomeIcon icon="spinner" spin /> }
+        { isLoading && <div><FontAwesomeIcon icon={ faSpinner } spin /> Loading...</div> }
       </div>
     );
   }

@@ -2,7 +2,7 @@ import "whatwg-fetch";
 import faker from "faker";
 
 const generateDummyItem = () => {
-  const id = (Math.random() * new Date().getTime());
+  const id = Math.floor(Math.random() * new Date().getTime()).toString();
   return {
     id,
     title: faker.commerce.productName(),
